@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list-item',
@@ -7,12 +7,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TodoListItemComponent implements OnInit {
   @Input() public todo ;
+  @Input() public diableClose = false ;
+  @Output() deleteAction: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
   }
   public toggleComplete() {
     this.todo.completed = !this.todo.completed ;
+  }
+  public deleteTodo(e, todo) {
+    e.stopPropagation();
+    this.deleteAction.emit(todo.id);
   }
 
 }

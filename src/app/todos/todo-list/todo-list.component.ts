@@ -2,6 +2,8 @@ import { Http } from '@angular/http';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+import { remove } from 'lodash';
+
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-todo-list',
@@ -11,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TodoListComponent implements OnInit {
   public todosList = [];
   public newTodo: string;
+  public disbleTodoDelete = false;
   constructor(
     private route: ActivatedRoute,
     private http: Http
@@ -27,15 +30,28 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
   }
   keyDownFunction(event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 && this.newTodo !== '') {
       this.todosList.push({
         title: this.newTodo,
-        completed: false
+        completed: false,
+        id : + new Date()
       });
       this.newTodo = '';
-      window.scrollTo(0,document.body.scrollHeight);
+      window.scrollTo(0, document.body.scrollHeight + 20 ) ;
 
       // rest of your code
     }
   }
+
+  public deleteTodo(e) {
+    // this.disbleTodoDelete = true;
+    // this.http.delete('https://jsonplaceholder.typicode.com/todos/' +  e ).subscribe((data) => {
+       // this.disbleTodoDelete = false;
+         remove(this.todosList, (o: any) => {
+          return o.id == e;
+        });
+  //   },
+  //   () => { this.disbleTodoDelete = false; }
+  //   );
+     }
 }

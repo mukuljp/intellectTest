@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: getUserModule },
   { path: 'todos/:userId', loadChildren: getTodosModule },
+  {  path: '**' , redirectTo: 'home' }
 ];
 
 @NgModule({

@@ -1,13 +1,21 @@
 
-<h2> User's Todo List</h2>
+<h2 class=" col-md-9 col-centered display-2"> User's Todo List</h2>
+
+
 
 <div class="row">
-  <h3>Create new todo</h3>
-  <input (keydown)="keyDownFunction($event)" [(ngModel)]="newTodo" type="text"  placeholder="enter Todo" />
+
+
+       <input  (keydown)="keyDownFunction($event)" [(ngModel)]="newTodo" class="form-control form-control-lg" type="text" placeholder="Create a Todo Here">
+     
 </div>
 
-<ul class="list-group">
+<ul class="list-group col-md-5 col-centered">
 
-
-    <app-todo-list-item [todo]="todo" *ngFor="let todo of todosList" > </app-todo-list-item>
-  </ul>
+    <li *ngIf="todosList.length==0"
+    class="list-group-item d-flex justify-content-between align-items-center"
+    >
+    No Items in your list!
+    </li>
+    <app-todo-list-item [diableClose]="disbleTodoDelete" [todo]="todo" (deleteAction)="deleteTodo($event)" *ngFor="let todo of todosList" > </app-todo-list-item>
+</ul>
