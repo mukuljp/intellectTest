@@ -1,3 +1,5 @@
+import { TodosModule } from './todos/todos.module';
+import { UsersModule } from './users/users.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,7 +12,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    UsersModule,
+    TodosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

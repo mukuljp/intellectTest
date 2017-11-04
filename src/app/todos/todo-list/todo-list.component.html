@@ -1,0 +1,13 @@
+
+<h2> User's Todo List</h2>
+
+<div class="row">
+  <h3>Create new todo</h3>
+  <input (keydown)="keyDownFunction($event)" [(ngModel)]="newTodo" type="text"  placeholder="enter Todo" />
+</div>
+
+<ul class="list-group">
+
+
+    <app-todo-list-item [todo]="todo" *ngFor="let todo of todosList" > </app-todo-list-item>
+  </ul>

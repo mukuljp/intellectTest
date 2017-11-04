@@ -1,0 +1,16 @@
+<div class="card margin10">
+    <div class="card-block">
+      <h4 class="card-title">{{userItem.name}}</h4>
+      <h6 class="card-subtitle mb-2 text-muted">User Name : {{userItem.username}}</h6>
+      <!-- <h6 class="card-subtitle mb-2 text-muted">Address : {{userItem.address | json}}</h6> -->
+      <h6 class="card-subtitle mb-2 text-muted">Email : {{userItem.email}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Phone : {{userItem.phone}}</h6>
+      <h6 class="card-subtitle mb-2 text-muted">WebSite : <a [href]="userItem.website" class="card-link">{{userItem.website}}</a></h6>
+
+      <a href="#" [routerLink]="['../todos',userItem.id]" class="card-link">{{userItem.name}}'s Todos</a>
+
+    </div>
+  </div>
+
+
+
