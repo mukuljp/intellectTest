@@ -9,12 +9,14 @@ export class TodoListItemComponent implements OnInit {
   @Input() public todo ;
   @Input() public diableClose = false ;
   @Output() deleteAction: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onChangeStatus: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
   }
   public toggleComplete() {
     this.todo.completed = !this.todo.completed ;
+    this.onChangeStatus.emit(this.todo);
   }
   public deleteTodo(e, todo) {
     e.stopPropagation();

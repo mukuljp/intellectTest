@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AppService } from "../../app.service";
 
 @Component({
   selector: 'app-user-item',
@@ -9,9 +10,14 @@ export class UserItemComponent implements OnInit {
 
 
   @Input() public userItem ;
-  constructor() { }
+  constructor(
+    private appService: AppService
+  ) { }
 
   ngOnInit() {
   }
-
+  public setUser() {
+    this.appService.setUserData(this.userItem);
+    console.log("fooo");
+  }
 }

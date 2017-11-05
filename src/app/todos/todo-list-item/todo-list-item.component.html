@@ -1,5 +1,5 @@
 
-<li [ngClass]="{'striked':todo.completed,'enabled':!todo.completed}"  (click)="toggleComplete(todo)" class="list-group-item d-flex justify-content-between align-items-center">
+<li [ngClass]="{'striked':todo.completed,'enabled':!todo.completed}"  (click)="toggleComplete()" class="list-group-item d-flex justify-content-between align-items-center">
     <span >{{todo.title}}</span>
     <span (click)="deleteTodo($event,todo)" class="badge  badge-pill"><button [disabled]="diableClose" type="button" class="close" aria-label="Close">
   <span aria-hidden="true">&times;</span>

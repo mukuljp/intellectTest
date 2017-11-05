@@ -3,6 +3,7 @@ import { any } from 'codelyzer/util/function';
 import { map } from 'rxjs/operators';
 import { Http } from '@angular/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-user-list',
@@ -12,14 +13,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class UserListComponent implements OnInit {
   public userList = [];
   constructor(
-    private http: Http
+    private http: Http,
+    private appService: AppService
   ) { }
 
   ngOnInit() {
-    this.http.get('https://jsonplaceholder.typicode.com/users').
-    subscribe((data: any) => {
-      console.log(JSON.parse(data._body),"blaaa");
-      this.userList = JSON.parse(data._body);
+    this.appService.getUsers().subscribe((data: any) => {
+      this.userList = data;
     });
   }
 

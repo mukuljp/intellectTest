@@ -12,8 +12,8 @@ export function getTodosModule() {
 }
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: getUserModule },
-  { path: 'todos/:userId', loadChildren: getTodosModule },
+  { path: 'home', loadChildren: './users/users.module#UsersModule' },
+  { path: 'todos/:userId', loadChildren: './todos/todos.module#TodosModule' },
   {  path: '**' , redirectTo: 'home' }
 ];
 

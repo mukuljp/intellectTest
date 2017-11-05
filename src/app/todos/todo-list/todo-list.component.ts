@@ -2,9 +2,9 @@ import { Http } from '@angular/http';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { remove } from 'lodash';
 
 import { ActivatedRoute } from '@angular/router';
+import { AppService } from '../../app.service';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
@@ -14,32 +14,30 @@ export class TodoListComponent implements OnInit {
   public todosList = [];
   public newTodo: string;
   public disbleTodoDelete = false;
+  public user;
   constructor(
     private route: ActivatedRoute,
-    private http: Http
+    private http: Http,
+    private appService: AppService
   ) {
     this.route.params.subscribe((data) => {
+      this.user = { name : ''};
         console.log(data,"blaa");
-        this.http.get('https://jsonplaceholder.typicode.com/todos?userId=' + data.userId).subscribe((data: any) => {
-          console.log(data,"pheee");
-          this.todosList = JSON.parse(data._body);
+        this.appService.currentUserId = data.userId;
+        this.appService.getTodos().subscribe((todos: any) => {
+          this.todosList = todos;
+          this.user = this.appService.currentUser;
         });
     });
+    
   }
 
   ngOnInit() {
   }
   keyDownFunction(event) {
     if (event.keyCode == 13 && this.newTodo !== '') {
-      this.todosList.push({
-        title: this.newTodo,
-        completed: false,
-        id : + new Date()
-      });
+      this.todosList = this.appService.addTodo(this.todosList , this.newTodo);
       this.newTodo = '';
-      window.scrollTo(0, document.body.scrollHeight + 20 ) ;
-
-      // rest of your code
     }
   }
 
@@ -47,11 +45,13 @@ export class TodoListComponent implements OnInit {
     // this.disbleTodoDelete = true;
     // this.http.delete('https://jsonplaceholder.typicode.com/todos/' +  e ).subscribe((data) => {
        // this.disbleTodoDelete = false;
-         remove(this.todosList, (o: any) => {
-          return o.id == e;
-        });
+       this.todosList = this.appService.deleteTodo(this.todosList, e);
   //   },
   //   () => { this.disbleTodoDelete = false; }
   //   );
      }
+
+  public changeTodoStatus(e) {
+    this.todosList = this.appService.markTodoStatus(this.todosList, e);
+  }
 }

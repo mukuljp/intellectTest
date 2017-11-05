@@ -1,5 +1,5 @@
 
-<h2 class=" col-md-9 col-centered display-2"> User's Todo List</h2>
+<h2 class=" col-md-11 col-centered display-3"> {{user.name}}'s Todo</h2>
 
 
 
@@ -17,5 +17,5 @@
     >
     No Items in your list!
     </li>
-    <app-todo-list-item [diableClose]="disbleTodoDelete" [todo]="todo" (deleteAction)="deleteTodo($event)" *ngFor="let todo of todosList" > </app-todo-list-item>
+    <app-todo-list-item [diableClose]="disbleTodoDelete" [todo]="todo" (onChangeStatus)="changeTodoStatus($event)" (deleteAction)="deleteTodo($event)" *ngFor="let todo of todosList" > </app-todo-list-item>
 </ul>

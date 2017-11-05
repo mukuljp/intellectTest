@@ -7,7 +7,7 @@
       <h6 class="card-subtitle mb-2 text-muted">Phone : {{userItem.phone}}</h6>
       <h6 class="card-subtitle mb-2 text-muted">WebSite : <a [href]="userItem.website" class="card-link">{{userItem.website}}</a></h6>
 
-      <a href="#" [routerLink]="['../todos',userItem.id]" class="card-link">{{userItem.name}}'s Todos</a>
+      <a href="#" (click)="setUser()" [routerLink]="['../todos',userItem.id]" class="card-link">{{userItem.name}}'s Todos</a>
 
     </div>
   </div>
